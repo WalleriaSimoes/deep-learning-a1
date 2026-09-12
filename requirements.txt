@@ -1,0 +1,9 @@
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch
+torchvision
+numpy
+opencv-python
+albumentations
+scikit-image
+scipy
+matplotlib
