@@ -26,6 +26,7 @@ from torchvision.utils import make_grid
 MEAN       = [0.485, 0.456, 0.406]
 STD        = [0.229, 0.224, 0.225]
 BATCH_SIZE = 16
+device     = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 #########################################################################
@@ -812,7 +813,6 @@ def train_loop(model, optimizer, loader_train, transform_mask, loss):
     loss_train = 0.0
     model.train()
     for img, mask in loader_train:
-        device = img.device
         img = img.to(device)
         mask = mask.to(device)
 
@@ -836,7 +836,6 @@ def val_loop(model, loader_val, transform_mask, loss, decoder, metric_function,*
     img_count = 0
     with torch.no_grad():
         for img, mask_original in loader_val:
-            device = img.device
             img = img.to(device)
             mask_original = mask_original.to(device)
             # Aplica uma transformacao na mascara, caso desejado
@@ -1018,7 +1017,7 @@ print(f"Mean metrics: {mean_metrics}\n")
 #########################################################################
 #                           MODELO DA PARTE 2                           #
 #########################################################################
-best_model_path = "models/best_model_parte_01.pth"
+best_model_path = "models/best_model_parte_02.pth"
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = UNet(in_channels=3, out_channels=3).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)

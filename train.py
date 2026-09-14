@@ -812,7 +812,6 @@ def train_loop(model, optimizer, loader_train, transform_mask, loss):
     loss_train = 0.0
     model.train()
     for img, mask in loader_train:
-        device = img.device
         img = img.to(device)
         mask = mask.to(device)
 
@@ -836,7 +835,6 @@ def val_loop(model, loader_val, transform_mask, loss, decoder, metric_function,*
     img_count = 0
     with torch.no_grad():
         for img, mask_original in loader_val:
-            device = img.device
             img = img.to(device)
             mask_original = mask_original.to(device)
             # Aplica uma transformacao na mascara, caso desejado
